@@ -1,0 +1,26 @@
+<h1 class="heading" style="color: red;">{{title}}</h1>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4 class="heading">{{desc}}</h4>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pr of product">
+                    <td><img [src]="pr.imageUrl" [style.width.px]="imageWidth"/></td>
+                    <td>{{pr.productCode}}</td>
+                    <td>{{pr.productName}}</td>
+                    <td>{{pr.price}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
