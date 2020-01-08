@@ -10,6 +10,15 @@ export class ProductComponent{
     title:string = "Product App";
     desc:string = "This is all about products";
     imageWidth:number=50;
+    showTable:boolean = true;
+    showImage:boolean = true;
+    userInput:string="";
+
+    toggleImage():void{
+        console.log(this.showImage);
+        this.showImage = !this.showImage;
+    };
+
     product:any[] = [
         {
         _id: '5a05dacc734d1d68d42d31f3',

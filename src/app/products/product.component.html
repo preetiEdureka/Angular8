@@ -3,24 +3,45 @@
     <div class="panel-heading">
         <h4 class="heading">{{desc}}</h4>
     </div>
-    <div class="panel-body">
-        <table class="table">
+    <div class="panel-body" >
+        <div class="row">
+            <div class="col-md-2">
+               <h4>Filter</h4>
+            </div>
+            <div class="col-md-4">
+                <input type="text" [(ngModel)]="userInput"/>
+            </div>        
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Filter on the basis of {{userInput}}</h4>
+            </div>
+        </div>
+        <table class="table" *ngIf="(product && product.length); else loading">
             <thead>
                 <tr>
-                    <th>Image</th>
+                    <th>
+                    <button class="btn btn-danger" (click)="toggleImage()">
+                        {{showImage ? "Hide Image" : "Show Image" }}
+                    </button></th>
                     <th>Name</th>
                     <th>Code</th>
                     <th>Price</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let pr of product">
-                    <td><img [src]="pr.imageUrl" [style.width.px]="imageWidth"/></td>
-                    <td>{{pr.productCode}}</td>
-                    <td>{{pr.productName}}</td>
-                    <td>{{pr.price}}</td>
+                <tr *ngFor="let pr of product | SearchPipe:userInput">
+                    <td><img [src]="pr.imageUrl" [style.width.px]="imageWidth" *ngIf="showImage"/></td>
+                    <td>{{pr.productName | myUpperCase:"lower"}}</td>
+                    <td>{{pr.productCode | myUpperCase:"upper"}}</td>
+                    <td>{{pr.price | discount | currency : 'INR'}}</td>
+                    <td>{{pr.releaseDate | date:'dd-MM-yyyy'}}</td>
                 </tr>
             </tbody>
         </table>
+        <ng-template #loading>
+            <img src="../../assets/loader.gif"/>
+        </ng-template>
     </div>
 </div>
