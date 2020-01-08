@@ -8,6 +8,7 @@ import { FormsModule} from '@angular/forms'
 import { MyUpperPipe } from './products/myupper.pipe';
 import { MyDiscountPipe } from './products/discount.pipe';
 import { MySearchPipe } from './products/search.pipe';
+import { StartComponent } from './shared/star.component';
 
 @NgModule({
     // all component,directive,pipe
@@ -17,7 +18,8 @@ import { MySearchPipe } from './products/search.pipe';
     ProductComponent,
     MyUpperPipe,
     MyDiscountPipe,
-    MySearchPipe
+    MySearchPipe,
+    StartComponent
   ],
   //all modules
   imports: [
