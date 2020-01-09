@@ -2,13 +2,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home.component';
+import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './products/product.component';
 import { FormsModule} from '@angular/forms'
 import { MyUpperPipe } from './products/myupper.pipe';
 import { MyDiscountPipe } from './products/discount.pipe';
 import { MySearchPipe } from './products/search.pipe';
-import { StartComponent } from './shared/star.component';
+import { StarComponent } from './shared/star.component';
+import { ProductService } from './products/product.service';
+import {HttpClientModule} from '@angular/common/http';
+import { OrdersComponent } from './orders/orders.component';
+import { RouterModule } from '@angular/router';
+import { ProductDetailsComponent } from './products/product-details.component';
 
 @NgModule({
     // all component,directive,pipe
@@ -19,13 +24,22 @@ import { StartComponent } from './shared/star.component';
     MyUpperPipe,
     MyDiscountPipe,
     MySearchPipe,
-    StartComponent
+    StarComponent,
+    OrdersComponent,
+    ProductDetailsComponent
   ],
   //all modules
   imports: [
-    BrowserModule,FormsModule
+    BrowserModule,FormsModule,HttpClientModule,
+    RouterModule.forRoot([
+      {path:'home',component:HomeComponent},
+      {path:'orders',component:OrdersComponent},
+      {path:'products',component:ProductComponent},
+      {path:'product/:id',component:ProductDetailsComponent},
+      {path:'',redirectTo:'home',pathMatch:'full'}
+    ])
   ],
   bootstrap: [AppComponent], // only and only main component
-  providers: [] // only services
+  providers: [ProductService] // only services
 })
 export class MyModule { }

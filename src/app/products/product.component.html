@@ -34,11 +34,11 @@
             <tbody>
                 <tr *ngFor="let pr of product | SearchPipe:userInput">
                     <td><img [src]="pr.imageUrl" [style.width.px]="imageWidth" *ngIf="showImage"/></td>
-                    <td>{{pr.productName | myUpperCase:"lower"}}</td>
+                    <td><a [routerLink]="['/product',pr.productId]">{{pr.productName | myUpperCase:"lower"}}</a></td>
                     <td>{{pr.productCode | myUpperCase:"upper"}}</td>
                     <td>{{pr.price | discount | currency : 'INR'}}</td>
                     <td>{{pr.releaseDate | date:'dd-MM-yyyy'}}</td>
-                    <td><app-star></app-star></td>
+                    <td><app-star [rate]="pr.starRating" (ratingClicked)="dataRecive($event)"></app-star></td>
                 </tr>
             </tbody>
         </table>
